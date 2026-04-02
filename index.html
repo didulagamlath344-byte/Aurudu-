@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>අවුරුදු නැකත් 2026 - Ultimate Edition</title>
+    <title>අවුරුදු නැකත් 2026 - Official App</title>
     
     <meta name="theme-color" content="#800000">
-    <link rel="manifest" href="data:application/json,{'name':'Avurudu Nakath 2026','short_name':'Avurudu','start_url':'.','display':'standalone','background_color':'#fffdf5','theme_color':'#800000','icons':[{'src':'https://cdn-icons-png.flaticon.com/512/2698/2698194.png','sizes':'512x512','type':'image/png'}]}">
+    <link rel="manifest" href="data:application/json;base64,ewogICAgIm5hbWUiOiAiQXZ1cnVkdSBOYWthdGggMjAyNiIsCiAgICAic2hvcnRfbmFtZSI6ICJBdnVydWR1IiwKICAgICJzdGFydF91cmwiOiAiLi8iLAogICAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZmZmZGY1IiwKICAgICJ0aGVtZV9jb2xvciI6ICIjODAwMDAwIiwKICAgICJpY29ucyI6IFsKICAgICAgICB7CiAgICAgICAgICAgICJzcmMiOiAiaHR0cHM6Ly9jZG4taWNvbnMtcG5nLmZsYXRpY29uLmNvbS81MTIvMjY5OC8yNjk4MTk0LnBuZyIsCiAgICAgICAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgICAgICAgInR5cGUiOiAiaW1hZ2UvcG5nIgogICAgICAgIH0KICAgIF0KfQ==">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;700&family=Poppins:wght@300;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;700&family=Poppins:wght@400;600&display=swap');
 
         :root {
             --gold: #FFD700;
@@ -25,15 +25,63 @@
             margin: 0; padding: 0; overflow-x: hidden; color: #333;
         }
 
-        /* 🐦 Koha Animation */
-        .koha-wrap {
-            position: fixed; top: 15%; left: -100px;
-            z-index: 10; pointer-events: none;
-            animation: flyAcross 15s linear infinite;
+        /* 📲 Install Bar */
+        #installBtn {
+            background: var(--gold); color: var(--maroon); padding: 15px;
+            width: 100%; border: none; font-weight: bold; cursor: pointer;
+            display: none; position: sticky; top: 0; z-index: 2000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-family: 'Poppins';
         }
-        @keyframes flyAcross { to { left: 115%; } }
 
-        /* 🌸 Erabadu Flower Rain */
+        header {
+            background: linear-gradient(135deg, var(--maroon), var(--erabadu));
+            color: white; text-align: center; padding: 40px 20px 80px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.2); border: 1px solid white; color: white;
+            padding: 6px 14px; border-radius: 20px; cursor: pointer; margin: 4px; font-size: 0.85rem;
+        }
+        .lang-btn.active { background: var(--gold); color: var(--maroon); font-weight: bold; }
+
+        .main-countdown {
+            background: white; border-radius: 20px; margin: -50px auto 20px;
+            max-width: 480px; width: 90%; padding: 25px; text-align: center;
+            border: 3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative; z-index: 100;
+        }
+
+        .timer-grid { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .unit { background: var(--maroon); color: white; padding: 10px; border-radius: 10px; min-width: 60px; }
+        .unit span { display: block; font-size: 1.6rem; font-weight: bold; line-height: 1; }
+        .unit label { font-size: 0.7rem; opacity: 0.9; }
+
+        .container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
+
+        .card {
+            background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--gold);
+            transition: 0.3s; animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card.active-ritual { border-left-color: var(--green); background: #f0fdf4; transform: scale(1.02); }
+
+        .card-title { color: var(--maroon); font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
+        .card-desc { font-size: 1rem; line-height: 1.6; margin-bottom: 15px; color: #444; text-align: justify; }
+
+        .ritual-timer {
+            font-size: 0.9rem; font-weight: bold; color: var(--erabadu);
+            background: #fff3e0; padding: 6px 12px; border-radius: 5px; display: inline-block;
+        }
+
+        .voice-btn {
+            background: var(--maroon); color: white; border: none;
+            padding: 10px 18px; border-radius: 50px; cursor: pointer; float: right;
+        }
+
+        /* 🌸 Erabadu Rain */
         .flower {
             position: fixed; top: -10%; z-index: 999;
             pointer-events: none; animation: fall linear forwards;
@@ -41,95 +89,15 @@
         }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        header {
-            background: linear-gradient(135deg, var(--maroon), var(--erabadu));
-            color: white; text-align: center; padding: 30px 20px 80px;
-            position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .lang-btn {
-            background: rgba(255,255,255,0.2); border: 1px solid white; color: white;
-            padding: 5px 12px; border-radius: 20px; cursor: pointer; margin: 3px; font-size: 0.8rem;
-        }
-        .lang-btn.active { background: var(--gold); color: var(--maroon); font-weight: bold; }
-
-        .install-btn {
-            background: var(--gold); color: var(--maroon); padding: 12px;
-            width: 100%; border: none; font-weight: bold; cursor: pointer;
-            display: none; position: sticky; top: 0; z-index: 2000;
-        }
-
-        .main-countdown {
-            background: white; border-radius: 20px; margin: -50px auto 20px;
-            max-width: 480px; width: 90%; padding: 20px; text-align: center;
-            border: 3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative; z-index: 100;
-        }
-
-        .timer-grid { display: flex; justify-content: center; gap: 8px; margin-top: 10px; }
-        .unit { background: var(--maroon); color: white; padding: 8px; border-radius: 8px; min-width: 55px; }
-        .unit span { display: block; font-size: 1.4rem; font-weight: bold; }
-        .unit label { font-size: 0.65rem; text-transform: uppercase; }
-
-        .container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
-
-        .card {
-            background: white; border-radius: 15px; padding: 20px; margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--gold);
-            transition: 0.3s; position: relative; animation: slideIn 0.5s ease-out;
-        }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-        
-        .card.active-ritual { border-left-color: var(--green); background: #f0fdf4; transform: scale(1.02); }
-
-        .card-title { color: var(--maroon); font-weight: bold; font-size: 1.15rem; margin-bottom: 8px; }
-        .card-desc { font-size: 0.95rem; line-height: 1.6; margin-bottom: 12px; text-align: justify; }
-
-        .ritual-timer {
-            font-size: 0.85rem; font-weight: bold; color: var(--erabadu);
-            background: #fff3e0; padding: 4px 10px; border-radius: 5px; display: inline-block;
-        }
-
-        .voice-btn {
-            background: var(--maroon); color: white; border: none;
-            padding: 8px 15px; border-radius: 50px; cursor: pointer; float: right;
-        }
-
-        .music-toggle {
-            position: fixed; bottom: 20px; left: 20px; background: white;
-            border: 3px solid var(--gold); width: 55px; height: 55px;
-            border-radius: 50%; cursor: pointer; z-index: 1000; font-size: 24px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .notify-msg {
-            background: #fff; padding: 10px; text-align: center; 
-            font-size: 0.85rem; border-bottom: 2px solid var(--gold);
-        }
-
-        footer { text-align: center; padding: 30px; color: var(--maroon); font-weight: bold; opacity: 0.8; }
+        footer { text-align: center; padding: 40px; color: var(--maroon); font-weight: bold; opacity: 0.7; }
     </style>
 </head>
 <body>
 
-    <audio id="bgMusic" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg"></audio>
-    <audio id="kohaSound"><source src="https://www.soundjay.com/nature/sounds/cuckoo-1.mp3" type="audio/mpeg"></audio>
-    <audio id="alertSound"><source src="https://www.soundjay.com/buttons/sounds/beep-07.mp3" type="audio/mpeg"></audio>
-
-    <button id="installBtn" class="install-btn">📲 App එකක් ලෙස ලබාගන්න (Install)</button>
-
-    <div id="notifArea" class="notify-msg">
-        🔔 නැකත් දැනුම්දීම් ලබා ගැනීමට <button onclick="initNotif()" style="color:blue; border:none; background:none; text-decoration:underline; cursor:pointer;">මෙහි ක්ලික් කරන්න</button>
-    </div>
-
-    <button class="music-toggle" onclick="toggleMusic()" id="mBtn">🔇</button>
-
-    <div class="koha-wrap">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733604.png" width="50" alt="Koha">
-    </div>
+    <button id="installBtn">📲 මෙම App එක Phone එකට Install කරගන්න</button>
 
     <header>
-        <h1 id="mainTitle">සිංහල අලුත් අවුරුදු නැකත් සීට්ටුව</h1>
+        <h1 id="mainTitle">සිංහල අලුත් අවුරුදු නැකත් සීට්ටුව - 2026</h1>
         <div class="lang-switcher">
             <button class="lang-btn active" onclick="setLang('si')">සිංහල</button>
             <button class="lang-btn" onclick="setLang('ta')">தமிழ்</button>
@@ -138,38 +106,66 @@
     </header>
 
     <div class="main-countdown">
-        <div id="cdHead" style="font-weight: bold; font-size: 0.9rem; margin-bottom: 5px;">අලුත් අවුරුදු උදාවට තව:</div>
+        <div id="cdHead" style="font-weight: bold; color: var(--maroon);">අලුත් අවුරුදු උදාවට තව:</div>
         <div class="timer-grid">
             <div class="unit"><span id="days">00</span><label id="l-d">දින</label></div>
             <div class="unit"><span id="hours">00</span><label id="l-h">පැය</label></div>
-            <div class="unit"><span id="mins">00</span><label id="l-m">මිනි</label></div>
-            <div class="unit"><span id="secs">00</span><label id="l-s">තත්</label></div>
+            <div class="unit"><span id="mins">00</span><label id="l-m">මිනිත්තු</label></div>
+            <div class="unit"><span id="secs">00</span><label id="l-s">තත්පර</label></div>
         </div>
     </div>
 
     <div class="container" id="ritualList"></div>
 
-    <footer id="footerText">ඔබ සැමට සුබ අලුත් අවුරුද්දක් වේවා! - 2026</footer>
+    <footer id="fText">ඔබ සැමට සුබ අලුත් අවුරුද්දක් වේවා! - 2026</footer>
 
     <script>
         const rituals = [
-            { id: "moon", time: "2026-03-20T18:30:00", si: ["🌙 නව සඳ බැලීම", "අභිනව චන්ද්‍ර වර්ෂය සඳහා මාර්තු මස 20 වන සිකුරාදා දින නව සඳ බැලීම මැනවි."], ta: ["🌙 இளம்பிறை பார்த்தல்", "புதிய சந்திர ஆண்டிற்காக மார்ச் 20 வெள்ளிக்கிழமை இளம்பிறை பார்ப்பது நன்று."], en: ["🌙 New Moon", "Sight the new moon on Friday, March 20 for the new lunar year."] },
-            { id: "bath", time: "2026-04-13T10:00:00", si: ["🚿 පරණ අවුරුද්දට ස්නානය", "අප්‍රේල් මස 13 වැනි සඳුදා දින දිවුල් පත් යුෂ මිශ්‍ර නානු ගා ස්නානය කිරීම මැනවි."], ta: ["🚿 பழைய ஆண்டு நீராடல்", "ஏப்ரல் 13 திங்கட்கிழமை வில்வ இலை சாறு கலந்து நீராடுவது சிறப்பாகும்."], en: ["🚿 Old Year Bath", "Bathe on Monday, April 13 using wood-apple leaves juice."] },
-            { id: "dawn", time: "2026-04-14T09:32:00", si: ["☀️ අලුත් අවුරුදු උදාව", "අප්‍රේල් මස 14 වැනි අඟහරුවාදා පූර්ව භාග 09.32 ට අලුත් අවුරුද්ද උදාවෙයි."], ta: ["☀️ புத்தாண்டு பிறப்பு", "ஏப்ரல் 14 செவ்வாய்க்கிழமை முற்பகல் 09.32 மணிக்கு புத்தாண்டு பிறக்கின்றது."], en: ["☀️ New Year Dawn", "The New Year dawns on Tuesday, April 14 at 09.32 AM."] },
-            { id: "punya", time: "2026-04-14T03:08:00", si: ["🙏 පුණ්‍ය කාලය", "අප්‍රේල් මස 14 වැනි අඟහරුවාදා පූර්ව භාග 03.08 සිට අපර භාග 03.56 දක්වා."], ta: ["🙏 புண்ணிய காலம்", "ஏப்ரல் 14 முற்பகல் 03.08 முதல் பிற்பகல் 03.56 வரை புண்ணிய காலமாகும்."], en: ["🙏 Punya Kalaya", "Punya Kalaya is from 03.08 AM to 03.56 PM on April 14."] },
-            { id: "cook", time: "2026-04-14T10:41:00", si: ["🔥 ආහාර පිසීම", "අප්‍රේල් මස 14 වැනි අඟහරුවාදා පූර්ව භාග 10.41 ට රක්ත වර්ණ වස්ත්‍රාභරණයෙන් සැරසී දකුණු දිශාව බලා ලිප් බැඳ කිරි බතක් පිසීම මැනවි."], ta: ["🔥 உணவு சமைத்தல்", "ஏப்ரல் 14 முற்பகல் 10.41 மணிக்கு சிவப்பு ஆடை அணிந்து அடுப்பு மூட்டி பால் சோறு தயாரித்தல் நன்று."], en: ["🔥 Cooking", "On April 14 at 10.41 AM, light the hearth facing South dressed in red and cook milk rice."] },
-            { id: "eat", time: "2026-04-14T12:05:00", si: ["🤝 වැඩ ඇල්ලීම හා ආහාර අනුභවය", "අප්‍රේල් මස 14 වැනි අඟහරුවාදා අපර භාග 12.05 ට රක්ත වර්ණ වස්ත්‍රාභරණයෙන් සැරසී දකුණු දිශාව බලා සියලු වැඩ අල්ලා ආහාර අනුභවය මැනවි."], ta: ["🤝 வேலை மற்றும் உணவு", "ஏப்ரல் 14 பிற்பகல் 12.05 மணிக்கு வேலைகளைத் தொடங்கி உணவு உண்ணுதல் நன்று."], en: ["🤝 Work & Meals", "On April 14 at 12.05 PM, start work and partake in meals facing South."] },
-            { id: "oil", time: "2026-04-15T06:54:00", si: ["🌿 හිසතෙල් ගෑම", "අප්‍රේල් මස 15 වැනි බදාදා පූර්ව භාග 06.54 ට නැගෙනහිර දිශාව බලා හිසතෙල් ගෑම මැනවි."], ta: ["🌿 எண்ணெய் வைத்தல்", "ஏப்ரல் 15 முற்பகல் 06.54 மணிக்கு கிழக்கு நோக்கி எண்ணெய் வைப்பது நன்று."], en: ["🌿 Anointing Oil", "On April 15 at 06.54 AM, anoint oil facing East."] },
-            { id: "work", time: "2026-04-20T06:27:00", si: ["💼 රැකී රක්ෂා සඳහා පිටත්වීම", "අප්‍රේල් මස 20 වැනි සඳුදා පූර්ව භාග 06.27 ට දකුණු දිශාව බලා රැකී රක්ෂා සඳහා පිටත්වීම මැනවි."], ta: ["💼 தொழிலுக்குச் செல்லுதல்", "ஏப்ரல் 20 முற்பகல் 06.27 மணிக்கு தெற்கு நோக்கிப் புறப்படுவது நன்று."], en: ["💼 Departing for Work", "On April 20 at 06.27 AM, depart for work facing South."] }
+            { id: "moon", time: "2026-03-20T18:30:00", si: ["🌙 නව සඳ බැලීම", "අභිනව චන්ද්‍ර වර්ෂය සඳහා මාර්තු මස 20 වන සිකුරාදා දින නව සඳ බැලීම මැනවි."], ta: ["🌙 இளம்பிறை பார்த்தல்", "மார்ச் 20 வெள்ளிக்கிழமை இளம்பிறை பார்ப்பது நன்று."], en: ["🌙 New Moon", "Sight the new moon on Friday, March 20."] },
+            { id: "bath", time: "2026-04-13T10:00:00", si: ["🚿 පරණ අවුරුද්දට ස්නානය", "අප්‍රේල් මස 13 වැනි සඳුදා දින දිවුල් පත් යුෂ මිශ්‍ර නානු ගා ස්නානය කිරීම මැනවි."], ta: ["🚿 பழைய ஆண்டு நீராடல்", "ஏப்ரல் 13 திங்கட்கிழமை நீராடுவது சிறப்பாகும்."], en: ["🚿 Old Year Bath", "Bathe on Monday, April 13 using herbals."] },
+            { id: "dawn", time: "2026-04-14T09:32:00", si: ["☀️ අලුත් අවුරුදු උදාව", "අප්‍රේල් මස 14 වැනි අඟහරුවාදා පූර්ව භාග 09.32 ට අලුත් අවුරුද්ද උදාවෙයි."], ta: ["☀️ புத்தாண்டு பிறப்பு", "ஏப்ரல் 14 முற்பகல் 09.32 மணிக்கு புத்தாண்டு பிறக்கின்றது."], en: ["☀️ New Year Dawn", "The New Year dawns on Tuesday, April 14 at 09.32 AM."] },
+            { id: "punya", time: "2026-04-14T03:08:00", si: ["🙏 පුණ්‍ය කාලය", "අප්‍රේල් මස 14 වැනි අඟහරුවාදා පූර්ව භාග 03.08 සිට අපර භාග 03.56 දක්වා."], ta: ["🙏 புண்ணிய காலம்", "ஏப்ரல் 14 முற்பகல் 03.08 முதல் பிற்பகல் 03.56 வரை."], en: ["🙏 Punya Kalaya", "Punya Kalaya is from 03.08 AM to 03.56 PM."] },
+            { id: "cook", time: "2026-04-14T10:41:00", si: ["🔥 ආහාර පිසීම", "අප්‍රේල් මස 14 වැනි අඟහරුවාදා පූර්ව භාග 10.41 ට රක්ත වර්ණ වස්ත්‍රාභරණයෙන් සැරසී දකුණු දිශාව බලා ලිප් බැඳ කිරි බතක් පිසීම මැනවි."], ta: ["🔥 உணவு சமைத்தல்", "ஏப்ரல் 14 முற்பகல் 10.41 மணிக்கு சிவப்பு ஆடை அணிந்து சமைக்கவும்."], en: ["🔥 Cooking", "On April 14 at 10.41 AM, cook milk rice facing South."] },
+            { id: "eat", time: "2026-04-14T12:05:00", si: ["🤝 වැඩ ඇල්ලීම හා ආහාර අනුභවය", "අප්‍රේල් මස 14 වැනි අඟහරුවාදා අපර භාග 12.05 ට රක්ත වර්ණ වස්ත්‍රාභරණයෙන් සැරසී දකුණු දිශාව බලා ආහාර අනුභවය මැනවි."], ta: ["🤝 வேலை மற்றும் உணவு", "ஏப்ரல் 14 பிற்பகல் 12.05 மணிக்கு வேலைகளைத் தொடங்கவும்."], en: ["🤝 Work & Meals", "On April 14 at 12.05 PM, start work and have meals."] },
+            { id: "oil", time: "2026-04-15T06:54:00", si: ["🌿 හිසතෙල් ගෑම", "අප්‍රේල් මස 15 වැනි බදාදා පූර්ව භාග 06.54 ට කොළ පැහැති වස්ත්‍රාභරණයෙන් සැරසී නැගෙනහිර දිශාව බලා හිසතෙල් ගෑම මැනවි."], ta: ["🌿 எண்ணெய் வைத்தல்", "ஏப்ரல் 15 முற்பகல் 06.54 மணிக்கு கிழக்கு நோக்கி எண்ணெய் வைக்கவும்."], en: ["🌿 Anointing Oil", "On April 15 at 06.54 AM, anoint oil facing East."] },
+            { id: "work", time: "2026-04-20T06:27:00", si: ["💼 රැකී රක්ෂා සඳහා පිටත්වීම", "අප්‍රේල් මස 20 වැනි සඳුදා පූර්ව භාග 06.27 ට සුදු පැහැති වස්ත්‍රාභරණයෙන් සැරසී දකුණු දිශාව බලා රැකී රක්ෂා සඳහා පිටත්වීම මැනවි."], ta: ["💼 தொழிலுக்குச் செல்லுதல்", "ஏப்ரல் 20 முற்பகல் 06.27 மணிக்கு தொழிலுக்குப் புறப்படவும்."], en: ["💼 Departing for Work", "On April 20 at 06.27 AM, depart for work facing South."] }
         ];
 
         let lang = 'si';
-        let isPlaying = false;
-        const notified = new Set();
 
-        function initNotif() {
-            Notification.requestPermission().then(p => {
-                if(p === 'granted') document.getElementById('notifArea').style.display = 'none';
+        function updateTimers() {
+            const now = new Date().getTime();
+
+            // Main Countdown (Dawn)
+            const dawnTime = new Date("2026-04-14T09:32:00").getTime();
+            const mainDiff = dawnTime - now;
+
+            if (mainDiff > 0) {
+                document.getElementById('days').innerText = String(Math.floor(mainDiff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                document.getElementById('hours').innerText = String(Math.floor((mainDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById('mins').innerText = String(Math.floor((mainDiff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById('secs').innerText = String(Math.floor((mainDiff % (1000 * 60)) / 1000)).padStart(2, '0');
+            } else {
+                document.getElementById('cdHead').innerText = lang === 'si' ? "අලුත් අවුරුද්ද උදා වී ඇත!" : "New Year is Here!";
+            }
+
+            // Ritual Timers
+            rituals.forEach(r => {
+                const rTime = new Date(r.time).getTime();
+                const diff = rTime - now;
+                const timerEl = document.getElementById(`t-${r.id}`);
+                const cardEl = document.getElementById(`card-${r.id}`);
+
+                if (diff > 0) {
+                    const h = Math.floor(diff / (1000 * 60 * 60));
+                    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const s = Math.floor((diff % (1000 * 60)) / 1000);
+                    timerEl.innerText = lang === 'si' ? `තව: ${h}පැ ${m}මි ${s}තත්` : `Left: ${h}h ${m}m ${s}s`;
+                } else {
+                    timerEl.innerText = lang === 'si' ? "නැකත උදා වී ඇත!" : "Ritual Active!";
+                    timerEl.style.color = "var(--green)";
+                    cardEl.classList.add('active-ritual');
+                }
             });
         }
 
@@ -177,24 +173,26 @@
             lang = l;
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.innerText.toLowerCase().includes(l === 'si' ? 'සිංහල' : l === 'ta' ? 'தமிழ்' : 'english')));
             
-            const labels = { si: ["දින","පැය","මිනි","තත්","අලුත් අවුරුදු උදාවට තව:"], ta: ["நாட்கள்","மணி","நிமி","விநா","புத்தாண்டு பிறக்க இன்னும்:"], en: ["Days","Hrs","Mins","Secs","Countdown to New Year:"] };
+            const labels = { 
+                si: ["දින","පැය","මිනිත්තු","තත්පර","අලුත් අවුරුදු උදාවට තව:","සිංහල අලුත් අවුරුදු නැකත් සීට්ටුව - 2026","ඔබ සැමට සුබ අලුත් අවුරුද්දක් වේවා!"], 
+                ta: ["நாட்கள்","மணி","நிமிடம்","விநாடி","புத்தாண்டு பிறக்க இன்னும்:","சிங்கள புத்தாண்டு சுப நேரங்கள் - 2026","புத்தாண்டு வாழ்த்துக்கள்!"], 
+                en: ["Days","Hours","Mins","Secs","Countdown to New Year:","New Year Rituals 2026","Happy New Year!"] 
+            };
+            
             document.getElementById('l-d').innerText = labels[lang][0];
             document.getElementById('l-h').innerText = labels[lang][1];
             document.getElementById('l-m').innerText = labels[lang][2];
             document.getElementById('l-s').innerText = labels[lang][3];
             document.getElementById('cdHead').innerText = labels[lang][4];
+            document.getElementById('mainTitle').innerText = labels[lang][5];
+            document.getElementById('fText').innerText = labels[lang][6] + " - 2026";
             
             render();
+            updateTimers();
         }
 
         function render() {
             const list = document.getElementById('ritualList');
-            const titles = { si: "සිංහල අලුත් අවුරුදු නැකත් සීට්ටුව", ta: "சிங்கள புத்தாண்டு சுப நேரங்கள்", en: "New Year Rituals 2026" };
-            const footer = { si: "ඔබ සැමට සුබ අලුත් අවුරුද්දක් වේවා!", ta: "அனைவருக்கும் புத்தாண்டு வாழ்த்துக்கள்!", en: "Happy New Year to Everyone!" };
-            
-            document.getElementById('mainTitle').innerText = titles[lang];
-            document.getElementById('footerText').innerText = footer[lang] + " - 2026";
-
             list.innerHTML = rituals.map(r => `
                 <div class="card" id="card-${r.id}">
                     <div class="card-title">${r[lang][0]}</div>
@@ -206,94 +204,42 @@
             `).join('');
         }
 
-        function updateTimers() {
-            const now = new Date().getTime();
-            
-            // Main Dawn Timer
-            const dawn = new Date("2026-04-14T09:32:00").getTime();
-            const diff = dawn - now;
-            if(diff > 0) {
-                document.getElementById('days').innerText = String(Math.floor(diff / 86400000)).padStart(2, '0');
-                document.getElementById('hours').innerText = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-                document.getElementById('mins').innerText = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-                document.getElementById('secs').innerText = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-            }
-
-            // Individual Rituals
-            rituals.forEach(r => {
-                const target = new Date(r.time).getTime();
-                const d = target - now;
-                const el = document.getElementById(`t-${r.id}`);
-                const card = document.getElementById(`card-${r.id}`);
-
-                if(d > 0) {
-                    const hrs = Math.floor(d / 3600000);
-                    const mins = Math.floor((d % 3600000) / 60000);
-                    const secs = Math.floor((d % 60000) / 1000);
-                    el.innerText = lang === 'si' ? `තව: ${hrs}පැ ${mins}මි ${secs}තත්` : `Left: ${hrs}h ${mins}m ${secs}s`;
-                } else {
-                    el.innerText = lang === 'si' ? "නැකත උදා වී ඇත!" : "Ritual Time Active!";
-                    el.style.color = "var(--green)";
-                    card.classList.add('active-ritual');
-
-                    // Notification Logic
-                    if(d > -60000 && !notified.has(r.id)) {
-                        triggerNotification(r[lang][0], r[lang][1]);
-                        notified.add(r.id);
-                    }
-                }
-            });
-        }
-
-        function triggerNotification(title, body) {
-            document.getElementById('alertSound').play();
-            if (Notification.permission === 'granted') {
-                new Notification(title, { body: body, icon: 'https://cdn-icons-png.flaticon.com/512/2698/2698194.png' });
-            } else {
-                alert(`🔔 ${title}\n${body}`);
-            }
-        }
-
-        function speak(txt) {
+        function speak(text) {
             window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(txt);
+            const u = new SpeechSynthesisUtterance(text);
             u.lang = lang === 'si' ? 'si-LK' : lang === 'ta' ? 'ta-IN' : 'en-US';
             window.speechSynthesis.speak(u);
         }
 
-        function toggleMusic() {
-            const m = document.getElementById('bgMusic');
-            isPlaying ? (m.pause(), mBtn.innerText='🔇') : (m.play(), mBtn.innerText='🎵');
-            isPlaying = !isPlaying;
-        }
-
-        // PWA Install
-        let defPrompt;
+        // --- 📲 PWA Logic ---
+        let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault(); defPrompt = e;
+            e.preventDefault();
+            deferredPrompt = e;
             document.getElementById('installBtn').style.display = 'block';
         });
-        document.getElementById('installBtn').addEventListener('click', () => {
-            if(defPrompt) { defPrompt.prompt(); defPrompt = null; installBtn.style.display='none'; }
+
+        document.getElementById('installBtn').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') document.getElementById('installBtn').style.display = 'none';
+                deferredPrompt = null;
+            }
         });
 
-        // Background Animations
+        // 🌸 Background Animation
         setInterval(() => {
             const f = document.createElement('div');
             f.className = 'flower'; f.innerHTML = '✿';
             f.style.left = Math.random() * 100 + 'vw';
-            f.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            f.style.animationDuration = (Math.random() * 3 + 4) + 's';
             document.body.appendChild(f);
-            setTimeout(() => f.remove(), 5000);
+            setTimeout(() => f.remove(), 6000);
         }, 1500);
-
-        setInterval(() => {
-            if(isPlaying) document.getElementById('kohaSound').play();
-        }, 30000);
 
         setLang('si');
         setInterval(updateTimers, 1000);
-        if(Notification.permission === 'granted') document.getElementById('notifArea').style.display = 'none';
     </script>
 </body>
 </html>
