@@ -435,17 +435,37 @@ function sendNotification(title, body) {
         });
     }
 }
-        // --- 🎵 Background Music Logic ---
+       // --- 🎵 MP3 Playlist Logic (Updated) ---
 const bgMusic = document.getElementById('bgMusic');
+const audioSource = document.getElementById('audioSource');
 
-// පරිශීලකයා මුලින්ම Screen එක මත Click කළ විට හෝ Install Button එක එබූ විට සින්දුව ආරම්භ වේ
+// ඔබ සඳහන් කළ සින්දු 3හි නම්
+const myPlaylist = ['aurudu.mp3', 'aurudu01.mp3', 'aurudu02.mp3'];
+let currentTrack = 0;
+
+// මුලින්ම Screen එක Click කළ විට සින්දුව පටන් ගැනීමට
 document.addEventListener('click', () => {
-    bgMusic.play().catch(error => {
-        console.log("Autoplay blocked: User needs to interact first.");
-    });
-}, { once: true }); // මෙය ක්‍රියාත්මක වන්නේ පළමු Click එකේදී පමණි
+    bgMusic.play().then(() => {
+        console.log("Playing: " + myPlaylist[currentTrack]);
+    }).catch(err => console.log("Autoplay blocked by browser"));
+}, { once: true });
 
-// සින්දුව හැමවිටම Play වන බව තහවුරු කිරීමට (Optionally)
+// සින්දුවක් ඉවර වුණාම ඊළඟ එකට මාරු වීම
+bgMusic.onended = function() {
+    currentTrack++;
+    
+    // සින්දු 3ම ඉවර වුණාම ආයෙත් මුල ඉඳන් (aurudu.mp3) පටන් ගැනීමට
+    if (currentTrack >= myPlaylist.length) {
+        currentTrack = 0;
+    }
+    
+    // අලුත් සින්දුව ප්ලේ කිරීම
+    audioSource.src = myPlaylist[currentTrack];
+    bgMusic.load();
+    bgMusic.play();
+};
+
+// වැරදීමකින්වත් Pause වුණොත් (Mute කළ නොහැකි වීමට)
 bgMusic.onpause = function() {
     bgMusic.play();
 };
