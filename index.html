@@ -322,6 +322,46 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.log('Service Worker Selection Failed', err));
     });
 }
+        // --- 🔔 Notification Logic ---
+
+// ඇප් එක Load වන විටම Permission ඉල්ලීම
+if ("Notification" in window) {
+    Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+            console.log("Notification permission granted.");
+            scheduleAllNotifications(); // සියලුම නැකත් සඳහා Notification Schedule කිරීම
+        }
+    });
+}
+
+function scheduleAllNotifications() {
+    const now = new Date().getTime();
+
+    rituals.forEach(r => {
+        const ritualTime = new Date(r.time).getTime();
+        const diff = ritualTime - now;
+
+        // නැකත ඉදිරියට තිබේ නම් පමණක් Schedule කරන්න
+        if (diff > 0) {
+            setTimeout(() => {
+                sendNotification(r[lang][0], "දැන් නැකත උදාවී ඇත!");
+            }, diff);
+        }
+    });
+}
+
+function sendNotification(title, body) {
+    if (Notification.permission === "granted") {
+        navigator.serviceWorker.ready.then(registration => {
+            registration.showNotification(title, {
+                body: body,
+                icon: 'https://cdn-icons-png.flaticon.com/512/2698/2698194.png',
+                vibrate: [200, 100, 200],
+                badge: 'https://cdn-icons-png.flaticon.com/512/2698/2698194.png'
+            });
+        });
+    }
+}
     </script>
 </body>
 </html>
