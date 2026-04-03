@@ -94,6 +94,75 @@
         @media (max-width: 480px) {
             .action-btns { float: none; margin-top: 15px; justify-content: center; }
         }
+/* මුළු පිටුවම Mobile-First විදියට සකස් කිරීම */
+body {
+    font-family: 'Noto Serif Sinhala', sans-serif;
+    background: var(--cream);
+    margin: 0; padding: 0; 
+    overflow-x: hidden; /* Screen එක දෙපැත්තට පැන්නීම වැළැක්වීමට */
+    color: #333;
+    -webkit-tap-highlight-color: transparent; /* Mobile touch highlight ඉවත් කිරීම */
+}
+
+/* Header එකේ උස සහ අකුරු ප්‍රමාණය */
+header {
+    background: linear-gradient(135deg, var(--maroon), var(--erabadu));
+    color: white; text-align: center; 
+    padding: 30px 15px 70px; /* Padding අඩු කර ඇත */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    font-size: 1.5rem; /* Mobile වලට ගැලපෙන අකුරු ප්‍රමාණය */
+    margin-bottom: 15px;
+}
+
+/* Countdown එකේ පෙනුම */
+.main-countdown {
+    background: white; border-radius: 20px; 
+    margin: -40px auto 20px; /* Margin අඩු කර ඇත */
+    width: 92%; /* Screen එකේ ඉඩ වැඩිපුර ගැනීම */
+    max-width: 400px;
+    padding: 20px 15px;
+    border: 3px solid var(--gold);
+    box-sizing: border-box; /* Padding නිසා පිටතට පැනීම වැළැක්වීමට */
+}
+
+.unit {
+    background: var(--maroon);
+    color: white;
+    padding: 8px 5px;
+    border-radius: 12px;
+    flex: 1; /* හැම කොටසකටම සමාන ඉඩක් ලබා දීම */
+    min-width: 0; 
+}
+
+.unit span { font-size: 1.3rem; } /* අකුරු ප්‍රමාණය මදක් අඩු කළා */
+
+/* Cards වල පෙනුම */
+.card {
+    background: white; 
+    border-radius: 15px; 
+    padding: 18px; 
+    margin-bottom: 15px;
+    border-left: 6px solid var(--gold); /* Border එක මදක් සිහින් කළා */
+    box-sizing: border-box;
+}
+
+.card-title { font-size: 1.15rem; }
+
+/* Buttons පහළට වැටීම වැළැක්වීමට සහ පහසුවෙන් එබිය හැකි වීමට */
+.action-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.btn-round {
+    width: 45px; /* Mobile එකේ ඇඟිල්ලෙන් එබීමට පහසු වන ලෙස විශාල කළා */
+    height: 45px;
+}        
     </style>
 </head>
 <body>
