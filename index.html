@@ -2,7 +2,7 @@
 <html lang="si">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>අවුරුදු නැකත් 2026 - Official App</title>
     
     <meta name="theme-color" content="#800000">
@@ -24,73 +24,83 @@
             font-family: 'Noto Serif Sinhala', sans-serif;
             background: var(--cream);
             margin: 0; padding: 0; 
-            overflow-x: hidden;
             color: #333;
             -webkit-tap-highlight-color: transparent;
         }
 
+        /* --- Sticky Header Section --- */
+        .sticky-wrapper {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--cream);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
         #installBtn {
-            background: var(--gold); color: var(--maroon); padding: 15px;
+            background: var(--gold); color: var(--maroon); padding: 12px;
             width: 100%; border: none; font-weight: bold; cursor: pointer;
-            display: none; position: sticky; top: 0; z-index: 2000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-family: 'Poppins';
+            display: none; font-family: 'Poppins';
         }
 
         header {
             background: linear-gradient(135deg, var(--maroon), var(--erabadu));
             color: white; text-align: center; 
-            padding: 30px 15px 70px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 20px 15px 50px;
         }
 
-        header h1 { font-size: 1.5rem; margin-bottom: 15px; }
+        header h1 { font-size: 1.2rem; margin: 0 0 10px; }
 
-        .lang-switcher { margin-top: 10px; }
+        .lang-switcher { margin-top: 5px; }
         .lang-btn {
             background: rgba(255,255,255,0.2); border: 1px solid white; color: white;
-            padding: 8px 16px; border-radius: 20px; cursor: pointer; margin: 4px; font-size: 0.9rem;
+            padding: 6px 12px; border-radius: 20px; cursor: pointer; margin: 2px; font-size: 0.8rem;
         }
-        .lang-btn.active { background: var(--gold); color: var(--maroon); font-weight: bold; }
+        .lang-btn.active { background: var(--gold); color: var(--maroon); font-weight: bold; border-color: var(--gold); }
 
         .main-countdown {
-            background: white; border-radius: 20px; 
-            margin: -40px auto 20px;
-            width: 92%; max-width: 400px;
-            padding: 20px 15px;
-            border: 3px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            position: relative; z-index: 100;
-            box-sizing: border-box;
+            background: white; border-radius: 15px; 
+            margin: -35px auto 10px;
+            width: 90%; max-width: 400px;
+            padding: 15px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             text-align: center;
         }
 
-        .timer-grid { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
-        .unit { background: var(--maroon); color: white; padding: 10px 5px; border-radius: 12px; flex: 1; min-width: 0; }
-        .unit span { display: block; font-size: 1.3rem; font-weight: bold; }
-        .unit label { font-size: 0.7rem; opacity: 0.9; }
+        .timer-grid { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+        .unit { background: var(--maroon); color: white; padding: 8px 4px; border-radius: 10px; flex: 1; }
+        .unit span { display: block; font-size: 1.1rem; font-weight: bold; }
+        .unit label { font-size: 0.65rem; opacity: 0.9; }
 
-        .container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
+        /* --- Scrollable Content --- */
+        .container { 
+            max-width: 800px; 
+            margin: 10px auto; 
+            padding: 10px 15px 100px; /* Bottom padding for space */
+        }
 
         .card {
             background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--gold);
             transition: 0.3s; position: relative; box-sizing: border-box;
         }
-        .card.active-ritual { border-left-color: var(--green); background: #f0fdf4; transform: scale(1.02); }
+        .card.active-ritual { border-left-color: var(--green); background: #f0fdf4; transform: scale(1.01); }
 
-        .card-title { color: var(--maroon); font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
-        .card-desc { font-size: 1rem; line-height: 1.7; color: #444; text-align: justify; margin-bottom: 15px; }
+        .card-title { color: var(--maroon); font-weight: bold; font-size: 1.1rem; margin-bottom: 8px; }
+        .card-desc { font-size: 0.95rem; line-height: 1.6; color: #444; text-align: justify; margin-bottom: 12px; }
 
         .ritual-timer {
-            font-size: 0.9rem; font-weight: bold; color: var(--erabadu);
-            background: #fff3e0; padding: 8px 15px; border-radius: 50px; display: inline-block;
+            font-size: 0.85rem; font-weight: bold; color: var(--erabadu);
+            background: #fff3e0; padding: 6px 12px; border-radius: 50px; display: inline-block;
         }
 
-        .action-btns { display: flex; gap: 12px; justify-content: flex-end; margin-top: 10px; }
+        .action-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
         .btn-round {
             background: var(--maroon); color: white; border: none;
-            width: 45px; height: 45px; border-radius: 50%; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+            width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-size: 1rem;
         }
         .btn-fb { background: var(--fb-blue); }
 
@@ -101,33 +111,35 @@
         }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        footer { text-align: center; padding: 40px; color: var(--maroon); font-weight: bold; }
+        footer { text-align: center; padding: 20px; color: var(--maroon); font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <button id="installBtn">📲 මෙම App එක Phone එකට Install කරගන්න</button>
+    <div class="sticky-wrapper">
+        <button id="installBtn">📲 මෙම App එක Install කරගන්න</button>
+        <header>
+            <h1 id="mainTitle">සිංහල අලුත් අවුරුදු නැකත් සීට්ටුව - 2026</h1>
+            <div class="lang-switcher">
+                <button class="lang-btn active" id="btn-si" onclick="setLang('si')">සිංහල</button>
+                <button class="lang-btn" id="btn-ta" onclick="setLang('ta')">தமிழ்</button>
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+            </div>
+        </header>
 
-    <header>
-        <h1 id="mainTitle">සිංහල අලුත් අවුරුදු නැකත් සීට්ටුව - 2026</h1>
-        <div class="lang-switcher">
-            <button class="lang-btn active" id="btn-si" onclick="setLang('si')">සිංහල</button>
-            <button class="lang-btn" id="btn-ta" onclick="setLang('ta')">தமிழ்</button>
-            <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
-        </div>
-    </header>
-
-    <div class="main-countdown">
-        <div id="cdHead" style="font-weight: bold; color: var(--maroon);">අලුත් අවුරුදු උදාවට තව:</div>
-        <div class="timer-grid">
-            <div class="unit"><span id="days">00</span><label id="l-d">දින</label></div>
-            <div class="unit"><span id="hours">00</span><label id="l-h">පැය</label></div>
-            <div class="unit"><span id="mins">00</span><label id="l-m">මිනිත්තු</label></div>
-            <div class="unit"><span id="secs">00</span><label id="l-s">තත්පර</label></div>
+        <div class="main-countdown">
+            <div id="cdHead" style="font-weight: bold; color: var(--maroon); font-size: 0.9rem;">අලුත් අවුරුදු උදාවට තව:</div>
+            <div class="timer-grid">
+                <div class="unit"><span id="days">00</span><label id="l-d">දින</label></div>
+                <div class="unit"><span id="hours">00</span><label id="l-h">පැය</label></div>
+                <div class="unit"><span id="mins">00</span><label id="l-m">මිනිත්තු</label></div>
+                <div class="unit"><span id="secs">00</span><label id="l-s">තත්පර</label></div>
+            </div>
         </div>
     </div>
 
-    <div class="container" id="ritualList"></div>
+    <div class="container" id="ritualList">
+        </div>
 
     <audio id="bgMusic" preload="auto">
         <source id="audioSource" src="aurudu.mp3" type="audio/mpeg">
@@ -230,7 +242,7 @@
             
             const labels = { 
                 si: ["දින","පැය","මිනිත්තු","තත්පර","අලුත් අවුරුදු උදාවට තව:","සිංහල අලුත් අවුරුදු නැකත් සීට්ටුව - 2026","ඔබ සැමට සුබ අලුත් අවුරුද්දක් වේවා!"], 
-                ta: ["நாட்கள்","மணி","நிமிடம்","விநாடி","புத்தாண்டு பிறக்க இன்னும்:","சிங்கள புத்தாண்டு சுப நேரங்கள் - 2026","புத்தாண்டு வாழ்த்துக்கள்!"], 
+                ta: ["நாட்கள்","மணி","நிமிடம்","விநாடி","புத்தாண்டு பிறக்க இன்னும்:","සිංහල புத்தாண்டு சுப நேரங்கள் - 2026","புத்தாண்டு வாழ்த்துக்கள்!"], 
                 en: ["Days","Hours","Mins","Secs","Countdown to New Year:","New Year Rituals 2026","Happy New Year!"] 
             };
             
@@ -257,7 +269,6 @@
                         <button class="btn-round" onclick="speak('${r[lang][1].replace(/'/g, "\\'")}')">🔊</button>
                         <button class="btn-round btn-fb" onclick="shareFB('${r[lang][0]}', '${r[lang][1]}')">f</button>
                     </div>
-                    <div style="clear:both"></div>
                 </div>
             `).join('');
         }
@@ -312,38 +323,7 @@
             });
         }
 
-        // --- 🔔 Notification Logic ---
-        if ("Notification" in window) {
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") scheduleAllNotifications();
-            });
-        }
-
-        function scheduleAllNotifications() {
-            const now = new Date().getTime();
-            rituals.forEach(r => {
-                const diff = new Date(r.time).getTime() - now;
-                if (diff > 0) {
-                    setTimeout(() => {
-                        sendNotification(r[lang][0], "දැන් නැකත උදාවී ඇත!");
-                    }, diff);
-                }
-            });
-        }
-
-        function sendNotification(title, body) {
-            if (Notification.permission === "granted" && navigator.serviceWorker.controller) {
-                navigator.serviceWorker.ready.then(reg => {
-                    reg.showNotification(title, {
-                        body: body,
-                        icon: 'https://cdn-icons-png.flaticon.com/512/2698/2698194.png',
-                        vibrate: [200, 100, 200]
-                    });
-                });
-            }
-        }
-
-        // --- 🎵 MP3 Playlist Logic ---
+        // --- 🎵 MP3 Playlist Logic (UNTOUCHED) ---
         const bgMusic = document.getElementById('bgMusic');
         const audioSource = document.getElementById('audioSource');
         const myPlaylist = ['aurudu.mp3', 'aurudu01.mp3', 'aurudu02.mp3'];
