@@ -275,6 +275,53 @@
 
         setLang('si');
         setInterval(updateTimers, 1000);
+
+        // --- 📲 PWA Install Logic ---
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+// බ්‍රවුසරය විසින් ඇප් එකක් ලෙස ඉන්ස්ටෝල් කළ හැකි බව හඳුනාගත් විට
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Chrome 67 සහ ඊට පෙර සංස්කරණ වල ස්වයංක්‍රීයව prompt එක පෙන්වීම වැළැක්වීමට
+    e.preventDefault();
+    // සිදුවීම (event) පසුව භාවිතා කිරීමට තබා ගැනීම
+    deferredPrompt = e;
+    // ඉන්ස්ටෝල් බටන් එක පරිශීලකයාට පෙන්වීම
+    installBtn.style.display = 'block';
+});
+
+installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        // ඉන්ස්ටෝල් කිරීමේ පණිවිඩය පෙන්වීම
+        deferredPrompt.prompt();
+        // පරිශීලකයා තෝරාගත්තේ කුමක්දැයි බැලීම
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+        } else {
+            console.log('User dismissed the install prompt');
+        }
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+    }
+});
+
+// ඇප් එක සාර්ථකව ඉන්ස්ටෝල් වූ පසු බටන් එක ඉවත් කිරීම
+window.addEventListener('appinstalled', () => {
+    installBtn.style.display = 'none';
+    deferredPrompt = null;
+    console.log('PWA was installed');
+});
+
+// --- ⚙️ Service Worker Registration ---
+// මෙය ඉන්ස්ටෝල් බටන් එක වැඩ කිරීමට අත්‍යවශ්‍ය වේ
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker Registered'))
+            .catch(err => console.log('Service Worker Selection Failed', err));
+    });
+}
     </script>
 </body>
 </html>
