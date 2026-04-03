@@ -469,6 +469,22 @@ bgMusic.onended = function() {
 bgMusic.onpause = function() {
     bgMusic.play();
 };
+        if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+            // අලුත් update එකක් තියෙනවද බලනවා
+            reg.addEventListener('updatefound', () => {
+                const newWorker = reg.installing;
+                newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        // අලුත් update එකක් තිබුණොත් පිටුව refresh කරනවා
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+    });
+}
     </script>
 </body>
 </html>
