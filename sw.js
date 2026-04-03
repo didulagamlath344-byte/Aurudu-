@@ -46,3 +46,24 @@ self.addEventListener('fetch', e => {
     caches.match(e.request).then(res => res || fetch(e.request))
   );
 });
+// අලුත් එකක් ආපු ගමන් පරණ එක මරා දමා අලුත් එකට බලය ලබා දීම
+self.addEventListener('install', event => {
+    self.skipWaiting(); 
+});
+
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cache => {
+                    // පරණ cache එක අයින් කරලා අලුත් එකට ඉඩ දීම
+                    if (cache !== cacheName) {
+                        console.log('Service Worker: Clearing Old Cache');
+                        return caches.delete(cache);
+                    }
+                })
+            );
+        })
+    );
+    return self.clients.claim();
+});
