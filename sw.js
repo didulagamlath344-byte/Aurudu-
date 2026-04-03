@@ -21,3 +21,28 @@ self.addEventListener('fetch', e => {
     })
   );
 });
+const cacheName = 'avurudu-nakath-2026-v2';
+const assets = [
+  './',
+  './index.html'
+];
+
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(cacheName).then(cache => cache.addAll(assets))
+  );
+});
+
+// Notification එකක් Click කළ විට ඇප් එක විවෘත කිරීමට
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  e.waitUntil(
+    clients.openWindow('./') 
+  );
+});
+
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(res => res || fetch(e.request))
+  );
+});
