@@ -23,7 +23,10 @@
         body {
             font-family: 'Noto Serif Sinhala', sans-serif;
             background: var(--cream);
-            margin: 0; padding: 0; overflow-x: hidden; color: #333;
+            margin: 0; padding: 0; 
+            overflow-x: hidden;
+            color: #333;
+            -webkit-tap-highlight-color: transparent;
         }
 
         #installBtn {
@@ -35,10 +38,14 @@
 
         header {
             background: linear-gradient(135deg, var(--maroon), var(--erabadu));
-            color: white; text-align: center; padding: 40px 20px 80px;
+            color: white; text-align: center; 
+            padding: 30px 15px 70px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
+        header h1 { font-size: 1.5rem; margin-bottom: 15px; }
+
+        .lang-switcher { margin-top: 10px; }
         .lang-btn {
             background: rgba(255,255,255,0.2); border: 1px solid white; color: white;
             padding: 8px 16px; border-radius: 20px; cursor: pointer; margin: 4px; font-size: 0.9rem;
@@ -46,15 +53,20 @@
         .lang-btn.active { background: var(--gold); color: var(--maroon); font-weight: bold; }
 
         .main-countdown {
-            background: white; border-radius: 20px; margin: -50px auto 20px;
-            max-width: 480px; width: 90%; padding: 25px; text-align: center;
-            border: 3px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background: white; border-radius: 20px; 
+            margin: -40px auto 20px;
+            width: 92%; max-width: 400px;
+            padding: 20px 15px;
+            border: 3px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             position: relative; z-index: 100;
+            box-sizing: border-box;
+            text-align: center;
         }
 
-        .timer-grid { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
-        .unit { background: var(--maroon); color: white; padding: 10px; border-radius: 10px; min-width: 65px; }
-        .unit span { display: block; font-size: 1.6rem; font-weight: bold; }
+        .timer-grid { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+        .unit { background: var(--maroon); color: white; padding: 10px 5px; border-radius: 12px; flex: 1; min-width: 0; }
+        .unit span { display: block; font-size: 1.3rem; font-weight: bold; }
         .unit label { font-size: 0.7rem; opacity: 0.9; }
 
         .container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
@@ -62,11 +74,11 @@
         .card {
             background: white; border-radius: 15px; padding: 20px; margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 8px solid var(--gold);
-            transition: 0.3s; position: relative;
+            transition: 0.3s; position: relative; box-sizing: border-box;
         }
         .card.active-ritual { border-left-color: var(--green); background: #f0fdf4; transform: scale(1.02); }
 
-        .card-title { color: var(--maroon); font-weight: bold; font-size: 1.3rem; margin-bottom: 10px; }
+        .card-title { color: var(--maroon); font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; }
         .card-desc { font-size: 1rem; line-height: 1.7; color: #444; text-align: justify; margin-bottom: 15px; }
 
         .ritual-timer {
@@ -74,10 +86,10 @@
             background: #fff3e0; padding: 8px 15px; border-radius: 50px; display: inline-block;
         }
 
-        .action-btns { float: right; display: flex; gap: 10px; }
+        .action-btns { display: flex; gap: 12px; justify-content: flex-end; margin-top: 10px; }
         .btn-round {
             background: var(--maroon); color: white; border: none;
-            width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+            width: 45px; height: 45px; border-radius: 50%; cursor: pointer;
             display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
         }
         .btn-fb { background: var(--fb-blue); }
@@ -90,79 +102,6 @@
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
         footer { text-align: center; padding: 40px; color: var(--maroon); font-weight: bold; }
-        
-        @media (max-width: 480px) {
-            .action-btns { float: none; margin-top: 15px; justify-content: center; }
-        }
-/* මුළු පිටුවම Mobile-First විදියට සකස් කිරීම */
-body {
-    font-family: 'Noto Serif Sinhala', sans-serif;
-    background: var(--cream);
-    margin: 0; padding: 0; 
-    overflow-x: hidden; /* Screen එක දෙපැත්තට පැන්නීම වැළැක්වීමට */
-    color: #333;
-    -webkit-tap-highlight-color: transparent; /* Mobile touch highlight ඉවත් කිරීම */
-}
-
-/* Header එකේ උස සහ අකුරු ප්‍රමාණය */
-header {
-    background: linear-gradient(135deg, var(--maroon), var(--erabadu));
-    color: white; text-align: center; 
-    padding: 30px 15px 70px; /* Padding අඩු කර ඇත */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-header h1 {
-    font-size: 1.5rem; /* Mobile වලට ගැලපෙන අකුරු ප්‍රමාණය */
-    margin-bottom: 15px;
-}
-
-/* Countdown එකේ පෙනුම */
-.main-countdown {
-    background: white; border-radius: 20px; 
-    margin: -40px auto 20px; /* Margin අඩු කර ඇත */
-    width: 92%; /* Screen එකේ ඉඩ වැඩිපුර ගැනීම */
-    max-width: 400px;
-    padding: 20px 15px;
-    border: 3px solid var(--gold);
-    box-sizing: border-box; /* Padding නිසා පිටතට පැනීම වැළැක්වීමට */
-}
-
-.unit {
-    background: var(--maroon);
-    color: white;
-    padding: 8px 5px;
-    border-radius: 12px;
-    flex: 1; /* හැම කොටසකටම සමාන ඉඩක් ලබා දීම */
-    min-width: 0; 
-}
-
-.unit span { font-size: 1.3rem; } /* අකුරු ප්‍රමාණය මදක් අඩු කළා */
-
-/* Cards වල පෙනුම */
-.card {
-    background: white; 
-    border-radius: 15px; 
-    padding: 18px; 
-    margin-bottom: 15px;
-    border-left: 6px solid var(--gold); /* Border එක මදක් සිහින් කළා */
-    box-sizing: border-box;
-}
-
-.card-title { font-size: 1.15rem; }
-
-/* Buttons පහළට වැටීම වැළැක්වීමට සහ පහසුවෙන් එබිය හැකි වීමට */
-.action-btns {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
-
-.btn-round {
-    width: 45px; /* Mobile එකේ ඇඟිල්ලෙන් එබීමට පහසු වන ලෙස විශාල කළා */
-    height: 45px;
-}        
     </style>
 </head>
 <body>
@@ -172,9 +111,9 @@ header h1 {
     <header>
         <h1 id="mainTitle">සිංහල අලුත් අවුරුදු නැකත් සීට්ටුව - 2026</h1>
         <div class="lang-switcher">
-            <button class="lang-btn active" onclick="setLang('si')">සිංහල</button>
-            <button class="lang-btn" onclick="setLang('ta')">தமிழ்</button>
-            <button class="lang-btn" onclick="setLang('en')">English</button>
+            <button class="lang-btn active" id="btn-si" onclick="setLang('si')">සිංහල</button>
+            <button class="lang-btn" id="btn-ta" onclick="setLang('ta')">தமிழ்</button>
+            <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
         </div>
     </header>
 
@@ -189,11 +128,11 @@ header h1 {
     </div>
 
     <div class="container" id="ritualList"></div>
-<audio id="bgMusic" loop pre-load="auto">
-    <source src="aurudu.mp3" type="audio/mpeg">
-    <source src="aurudu01.mp3" type="audio/mpeg">
-    <source src="aurudu02.mp3" type="audio/mpeg">
-</audio>
+
+    <audio id="bgMusic" preload="auto">
+        <source id="audioSource" src="aurudu.mp3" type="audio/mpeg">
+    </audio>
+
     <footer id="fText">ඔබ සැමට සුබ අලුත් අවුරුද්දක් වේවා! - 2026</footer>
 
     <script>
@@ -223,7 +162,7 @@ header h1 {
               ta: ["☀️ புத்தாண்டு பிறப்பு", "ஏப்ரல் 14 செவ்வாய்க்கிழமை முற்பகல் 09.32 மணிக்கு சிங்கள புத்தாண்டு பிறக்கின்றது."], 
               en: ["☀️ New Year Dawn", "The Sinhala & Tamil New Year dawns on Tuesday, April 14th at 09.32 AM."] },
 
-            { id: "cook", time: "2026-04-14T10:41:00", 
+            { id: "cook", time: "2026-04-14T10:51:00", 
               si: ["🔥 ආහාර පිසීම", "අප්‍රේල් මස 14 වන අඟහරුවාදා පූර්වභාග 10.51 ට රක්ත වර්ණ වස්ත්‍රාභරණයෙන් සැරසී දකුණු දිශාව බලා ලිප් බැඳ ගිනි මොලවා කිරි බතක් ද කැවිලි වර්ගයක් ද පිළියෙල කර ගැනීම මැනවි."], 
               ta: ["🔥 உணவு சமைத்தல்", "ஏப்ரல் 14 முற்பகல் 10.51 மணிக்கு சிவப்பு ஆடை அணிந்து தெற்கு நோக்கி அடுப்பு மூட்டி பால்சோறு சமைக்கவும்."], 
               en: ["🔥 Cooking", "On Tuesday, April 14th at 10.51 AM, dressed in red, face South and cook milk rice and sweets."] },
@@ -286,7 +225,8 @@ header h1 {
 
         function setLang(l) {
             lang = l;
-            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.innerText.toLowerCase().includes(l === 'si' ? 'සිංහල' : l === 'ta' ? 'தமிழ்' : 'english')));
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${l}`).classList.add('active');
             
             const labels = { 
                 si: ["දින","පැය","මිනිත්තු","තත්පර","අලුත් අවුරුදු උදාවට තව:","සිංහල අලුත් අවුරුදු නැකත් සීට්ටුව - 2026","ඔබ සැමට සුබ අලුත් අවුරුද්දක් වේවා!"], 
@@ -336,7 +276,7 @@ header h1 {
             window.open(fbUrl, '_blank');
         }
 
-        // --- PWA & Animation Logic ---
+        // --- 🌸 Animation Logic ---
         setInterval(() => {
             const f = document.createElement('div');
             f.className = 'flower'; f.innerHTML = '✿';
@@ -346,145 +286,85 @@ header h1 {
             setTimeout(() => f.remove(), 6000);
         }, 2000);
 
+        // --- 📲 PWA Install Logic ---
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            }
+        });
+
+        // --- ⚙️ Service Worker Registration ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(err => console.log('SW failed', err));
+            });
+        }
+
+        // --- 🔔 Notification Logic ---
+        if ("Notification" in window) {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") scheduleAllNotifications();
+            });
+        }
+
+        function scheduleAllNotifications() {
+            const now = new Date().getTime();
+            rituals.forEach(r => {
+                const diff = new Date(r.time).getTime() - now;
+                if (diff > 0) {
+                    setTimeout(() => {
+                        sendNotification(r[lang][0], "දැන් නැකත උදාවී ඇත!");
+                    }, diff);
+                }
+            });
+        }
+
+        function sendNotification(title, body) {
+            if (Notification.permission === "granted" && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.showNotification(title, {
+                        body: body,
+                        icon: 'https://cdn-icons-png.flaticon.com/512/2698/2698194.png',
+                        vibrate: [200, 100, 200]
+                    });
+                });
+            }
+        }
+
+        // --- 🎵 MP3 Playlist Logic ---
+        const bgMusic = document.getElementById('bgMusic');
+        const audioSource = document.getElementById('audioSource');
+        const myPlaylist = ['aurudu.mp3', 'aurudu01.mp3', 'aurudu02.mp3'];
+        let currentTrack = 0;
+
+        document.addEventListener('click', () => {
+            if (bgMusic.paused) {
+                bgMusic.play().catch(e => console.log("Playback failed"));
+            }
+        }, { once: true });
+
+        bgMusic.onended = function() {
+            currentTrack = (currentTrack + 1) % myPlaylist.length;
+            audioSource.src = myPlaylist[currentTrack];
+            bgMusic.load();
+            bgMusic.play();
+        };
+
+        // Initialize
         setLang('si');
         setInterval(updateTimers, 1000);
-
-        // --- 📲 PWA Install Logic ---
-let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
-
-// බ්‍රවුසරය විසින් ඇප් එකක් ලෙස ඉන්ස්ටෝල් කළ හැකි බව හඳුනාගත් විට
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Chrome 67 සහ ඊට පෙර සංස්කරණ වල ස්වයංක්‍රීයව prompt එක පෙන්වීම වැළැක්වීමට
-    e.preventDefault();
-    // සිදුවීම (event) පසුව භාවිතා කිරීමට තබා ගැනීම
-    deferredPrompt = e;
-    // ඉන්ස්ටෝල් බටන් එක පරිශීලකයාට පෙන්වීම
-    installBtn.style.display = 'block';
-});
-
-installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-        // ඉන්ස්ටෝල් කිරීමේ පණිවිඩය පෙන්වීම
-        deferredPrompt.prompt();
-        // පරිශීලකයා තෝරාගත්තේ කුමක්දැයි බැලීම
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-            console.log('User accepted the install prompt');
-        } else {
-            console.log('User dismissed the install prompt');
-        }
-        deferredPrompt = null;
-        installBtn.style.display = 'none';
-    }
-});
-
-// ඇප් එක සාර්ථකව ඉන්ස්ටෝල් වූ පසු බටන් එක ඉවත් කිරීම
-window.addEventListener('appinstalled', () => {
-    installBtn.style.display = 'none';
-    deferredPrompt = null;
-    console.log('PWA was installed');
-});
-
-// --- ⚙️ Service Worker Registration ---
-// මෙය ඉන්ස්ටෝල් බටන් එක වැඩ කිරීමට අත්‍යවශ්‍ය වේ
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('Service Worker Registered'))
-            .catch(err => console.log('Service Worker Selection Failed', err));
-    });
-}
-        // --- 🔔 Notification Logic ---
-
-// ඇප් එක Load වන විටම Permission ඉල්ලීම
-if ("Notification" in window) {
-    Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-            console.log("Notification permission granted.");
-            scheduleAllNotifications(); // සියලුම නැකත් සඳහා Notification Schedule කිරීම
-        }
-    });
-}
-
-function scheduleAllNotifications() {
-    const now = new Date().getTime();
-
-    rituals.forEach(r => {
-        const ritualTime = new Date(r.time).getTime();
-        const diff = ritualTime - now;
-
-        // නැකත ඉදිරියට තිබේ නම් පමණක් Schedule කරන්න
-        if (diff > 0) {
-            setTimeout(() => {
-                sendNotification(r[lang][0], "දැන් නැකත උදාවී ඇත!");
-            }, diff);
-        }
-    });
-}
-
-function sendNotification(title, body) {
-    if (Notification.permission === "granted") {
-        navigator.serviceWorker.ready.then(registration => {
-            registration.showNotification(title, {
-                body: body,
-                icon: 'https://cdn-icons-png.flaticon.com/512/2698/2698194.png',
-                vibrate: [200, 100, 200],
-                badge: 'https://cdn-icons-png.flaticon.com/512/2698/2698194.png'
-            });
-        });
-    }
-}
-       // --- 🎵 MP3 Playlist Logic (Updated) ---
-const bgMusic = document.getElementById('bgMusic');
-const audioSource = document.getElementById('audioSource');
-
-// ඔබ සඳහන් කළ සින්දු 3හි නම්
-const myPlaylist = ['aurudu.mp3', 'aurudu01.mp3', 'aurudu02.mp3'];
-let currentTrack = 0;
-
-// මුලින්ම Screen එක Click කළ විට සින්දුව පටන් ගැනීමට
-document.addEventListener('click', () => {
-    bgMusic.play().then(() => {
-        console.log("Playing: " + myPlaylist[currentTrack]);
-    }).catch(err => console.log("Autoplay blocked by browser"));
-}, { once: true });
-
-// සින්දුවක් ඉවර වුණාම ඊළඟ එකට මාරු වීම
-bgMusic.onended = function() {
-    currentTrack++;
-    
-    // සින්දු 3ම ඉවර වුණාම ආයෙත් මුල ඉඳන් (aurudu.mp3) පටන් ගැනීමට
-    if (currentTrack >= myPlaylist.length) {
-        currentTrack = 0;
-    }
-    
-    // අලුත් සින්දුව ප්ලේ කිරීම
-    audioSource.src = myPlaylist[currentTrack];
-    bgMusic.load();
-    bgMusic.play();
-};
-
-// වැරදීමකින්වත් Pause වුණොත් (Mute කළ නොහැකි වීමට)
-bgMusic.onpause = function() {
-    bgMusic.play();
-};
-        if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').then(reg => {
-            // අලුත් update එකක් තියෙනවද බලනවා
-            reg.addEventListener('updatefound', () => {
-                const newWorker = reg.installing;
-                newWorker.addEventListener('statechange', () => {
-                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                        // අලුත් update එකක් තිබුණොත් පිටුව refresh කරනවා
-                        window.location.reload();
-                    }
-                });
-            });
-        });
-    });
-}
     </script>
 </body>
 </html>
