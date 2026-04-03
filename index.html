@@ -120,7 +120,9 @@
     </div>
 
     <div class="container" id="ritualList"></div>
-
+<audio id="bgMusic" loop pre-load="auto">
+    <source src="aurudu.mp3" type="audio/mpeg">
+</audio>
     <footer id="fText">ඔබ සැමට සුබ අලුත් අවුරුද්දක් වේවා! - 2026</footer>
 
     <script>
@@ -362,6 +364,20 @@ function sendNotification(title, body) {
         });
     }
 }
+        // --- 🎵 Background Music Logic ---
+const bgMusic = document.getElementById('bgMusic');
+
+// පරිශීලකයා මුලින්ම Screen එක මත Click කළ විට හෝ Install Button එක එබූ විට සින්දුව ආරම්භ වේ
+document.addEventListener('click', () => {
+    bgMusic.play().catch(error => {
+        console.log("Autoplay blocked: User needs to interact first.");
+    });
+}, { once: true }); // මෙය ක්‍රියාත්මක වන්නේ පළමු Click එකේදී පමණි
+
+// සින්දුව හැමවිටම Play වන බව තහවුරු කිරීමට (Optionally)
+bgMusic.onpause = function() {
+    bgMusic.play();
+};
     </script>
 </body>
 </html>
